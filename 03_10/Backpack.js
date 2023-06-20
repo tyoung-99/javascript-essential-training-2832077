@@ -7,16 +7,15 @@
 
 class Backpack {
   constructor(
-    // Defines parameters:
     name,
     volume,
     color,
     pocketNum,
     strapLengthL,
     strapLengthR,
-    lidOpen
+    lidOpen,
+    contents
   ) {
-    // Define properties:
     this.name = name;
     this.volume = volume;
     this.color = color;
@@ -26,11 +25,13 @@ class Backpack {
       right: strapLengthR,
     };
     this.lidOpen = lidOpen;
+    this.contents = contents;
   }
-  // Add methods like normal functions:
+
   toggleLid(lidStatus) {
     this.lidOpen = lidStatus;
   }
+
   newStrapLength(lengthLeft, lengthRight) {
     this.strapLength.left = lengthLeft;
     this.strapLength.right = lengthRight;

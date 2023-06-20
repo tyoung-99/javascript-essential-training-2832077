@@ -49,3 +49,5 @@ const content = `
 `;
 
 main.innerHTML = content;
+
+console.log(document.querySelector(".backpack_volume"));

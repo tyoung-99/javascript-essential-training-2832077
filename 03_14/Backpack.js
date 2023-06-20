@@ -7,7 +7,8 @@ class Backpack {
     strapLengthL,
     strapLengthR,
     lidOpen,
-    dateAcquired
+    dateAcquired,
+    contents
   ) {
     this.name = name;
     this.volume = volume;
@@ -19,6 +20,7 @@ class Backpack {
     };
     this.lidOpen = lidOpen;
     this.dateAcquired = dateAcquired;
+    this.contents = contents;
   }
   toggleLid(lidStatus) {
     this.lidOpen = lidStatus;
@@ -33,6 +35,20 @@ class Backpack {
     let elapsed = now - acquired; // elapsed time in milliseconds
     let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
     return daysSinceAcquired;
+  }
+
+  getContents() {
+    let contentsStr = "";
+
+    try {
+      this.contents.forEach((item) => {
+        contentsStr += item.print() + "\n";
+      });
+    } catch (error) {
+      contentsStr = "Contents contained unknown types.";
+    }
+
+    return contentsStr;
   }
 }
 

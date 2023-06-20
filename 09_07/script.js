@@ -40,6 +40,43 @@ const lidToggle = function (event, button, newArg) {
     : (status.innerText = "closed");
 };
 
+/**
+ * Updates length of backpack strap.
+ */
+const strapUpdate = function (event) {
+  event.preventDefault();
+  const textbox = this.querySelector("input");
+  const lenLabel = this.parentElement.querySelector("span");
+
+  lenLabel.innerText = `${textbox.value} inches`;
+  textbox.value = "";
+};
+
+/**
+ * Adds form for inputting length of given backpack strap HTML component to end of that component.
+ */
+const addStrapForm = (strap) => {
+  const form = document.createElement("form");
+  form.classList.add(`${strap.getAttribute("data-side")}Length`);
+
+  const textBox = document.createElement("input");
+  textBox.setAttribute("type", "number");
+  textBox.setAttribute("name", `${strap.getAttribute("data-side")}Length`);
+  textBox.setAttribute(
+    "placeholder",
+    `New ${strap.getAttribute("data-side")} length`
+  );
+
+  const updateButton = document.createElement("button");
+  updateButton.innerText = "Update";
+
+  form.append(textBox);
+  form.append(updateButton);
+  form.addEventListener("submit", strapUpdate);
+
+  strap.append(form);
+};
+
 const backpackList = backpackObjectArray.map((backpack) => {
   let backpackArticle = document.createElement("article");
   backpackArticle.classList.add("backpack");
@@ -81,6 +118,9 @@ const backpackList = backpackObjectArray.map((backpack) => {
   button.addEventListener("click", (event) => {
     lidToggle(event, button, newArg);
   });
+
+  const straps = backpackArticle.querySelectorAll(".backpack__strap");
+  straps.forEach(addStrapForm);
 
   return backpackArticle;
 });

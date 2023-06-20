@@ -39,6 +39,28 @@ const backpackList = backpackObjectArray.map((backpack) => {
     <button class="lid-toggle">Open lid</button>
   `;
 
+  const openStatus = backpackArticle.querySelector(".backpack__lid span");
+
+  backpackArticle
+    .querySelector(".lid-toggle")
+    .addEventListener("click", (event) => {
+      console.log(event.composedPath());
+      openStatus.innerText === "open"
+        ? (openStatus.innerText = "closed")
+        : (openStatus.innerText = "open");
+    });
+
+  const elems = backpackArticle.querySelectorAll(".feature");
+
+  elems.forEach((elem) => {
+    elem.addEventListener("mouseenter", () => {
+      elem.classList.add("fill-background");
+    });
+    elem.addEventListener("mouseleave", () => {
+      elem.classList.remove("fill-background");
+    });
+  });
+
   return backpackArticle;
 });
 
